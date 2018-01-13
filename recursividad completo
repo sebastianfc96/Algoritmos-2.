@@ -1,0 +1,296 @@
+#include "stdafx.h"
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+
+using namespace std;
+
+//tomar en cuenta que siempre todo lo calcula (hipotesis) hasta nuestro (n-1), para nuestra hipotesis inductiva.
+//caso base siempre es la primer estructura que estamos tomando.
+
+int factorial(int n)
+{
+	int x;
+	if(n==0)
+		return 1;
+	else
+	{
+		x=factorial(n-1);
+		return x*n;
+	}
+}
+
+int suma(int n)
+{
+	int s;
+	if(n==0)                    //casoo base
+		return 0;
+	else
+	{
+		s=suma(n-1);             //hipotesis inductiva, si entran dos variables al int, aqui tiene que haber 2 variables dentro de suma()
+		return s+n;              // aqui se suma el ultimo valor
+	}
+}
+
+int sumaPares(int n)
+{
+	int s;
+	if(n==0)                    //casoo base
+		return 0;
+	else
+	{
+		s=sumaPares(n-1);         //hipotesis inductiva, si entran dos variables al int, aqui tiene que haber 2 variables dentro de suma()
+		if(n%2==0)
+			return s+n;              // aqui se suma el ultimo valor si este es par
+		else
+			return s;                //aqui no se suma el ultimo valor si este no es par
+	}
+}
+
+int contarPares(int n)
+{
+	int p;
+	if(n==0)                    //casoo base
+		return 0;
+	else
+	{
+		p=contarPares(n-1);         //hipotesis inductiva, si entran dos variables al int, aqui tiene que haber 2 variables dentro de suma()
+		if(n%2==0)
+			return p+1;              // aqui se suma +1 si el ultimo valor es par
+		else
+			return p;                //aqui no se suma +1 si el ultimo valor no es par
+	}
+}
+
+int sumaCuadrado(int n)
+{
+	int s;
+	if(n==0)                    //casoo base
+		return 0;
+	else
+	{
+		s=sumaCuadrado(n-1);             //hipotesis inductiva, si entran dos variables al int, aqui tiene que haber 2 variables dentro de suma()
+		return s+powf(n,2);              // aqui se suma el ultimo valor, en este caso al cuadrado para que nos muestre toda la suma de los cuadrados.
+	}
+}
+
+float series(int n)
+{
+	float s;
+	if(n==0)                    //casoo base
+		return 0;
+	else
+	{
+		 s=series(n-1);                                  //hipotesis inductiva, si entran dos variables al int, aqui tiene que haber 2 variables dentro de suma()
+		
+		 return  (s+(factorial(n)/powf(n,2)));          // aqui se suma el ultimo valor, en este caso como es serie se le suma la serie a lo ultimo.
+	}
+}
+
+int potencia(int n,int p)
+{
+	int pot;
+	if(p==0)                    //casoo base
+		return 1;
+	else
+	{
+		 pot=potencia(n,p-1);                                  //hipotesis inductiva, si entran dos variables al int, aqui tiene que haber 2 variables dentro de suma()
+		
+		 return  (pot*n);          // aqui se multiplica por el valor, ya que solo fue elevado hasta una potencia antes de la puesta.
+	}
+}
+
+int sumaVector(int v[],int n)
+{
+	int s;
+	if(n==0)
+		return v[0];
+	else
+	{
+		s=sumaVector(v,n-1);
+		return s+v[n-1];        //en este caso el ultimo valor del vector es v[n-1]
+	}
+}
+
+//Realizar una funcion que imprima los n primeros
+//numeros naturales
+
+void naturales (int n)
+{
+	if(n==0)
+	{
+
+	}
+	else
+	{
+		naturales(n-1);    //llamo a la funcion haste (n-1)
+		cout<<n;           //muestro hasta n
+	}
+}
+
+void naturalesrevez (int n)
+{
+	if(n==0)
+	{
+
+	}
+	else
+	{
+		cout<<n;                  //muestro el primer numero
+		naturalesrevez(n-1);      //llamo la funcion hasta n-1 para mostrar el siguiente
+	}
+}
+
+//Mostrar los numeros pares que estan entre n
+//ej, si n=5   2  4
+
+void numParesEntre(int n)
+{
+	if(n==0)
+	{
+	}
+	else
+	{
+		numParesEntre(n-1);
+		cout<<n;
+		if(n%2==0)
+			cout<<n<<"  ";
+		else
+		{
+		}
+
+	}
+}
+
+//suma de los digitos de un numero
+
+int sumaDigitos(int n)
+{
+	if(n<10)
+	{
+		return n;
+	}
+	else
+	{
+		int s=sumaDigitos(n/10);
+		return s+n%10;
+	}
+}
+
+//dado un numero que me muestre todos sus digitos
+
+void digitos(int n)
+{
+	if(n<10)
+	{
+		cout<<n<<"  ";
+	}
+	else
+	{
+		digitos(n/10);               //me separa el digito del numero
+		cout<<n%10<<"  ";            //me muestra el digito separado
+	}
+}
+
+//Mostrar la cantidad de digitos pares de un numero
+//ej: 24578   -> 3
+
+int cantidadDigitosPares(int n)
+{
+	if(n<10)
+	{
+		if(n%2==0)
+			return 1;
+		else                                       //condicion para ver si el numero es par o no.
+			return 0;
+	}
+	else
+	{
+		int s=cantidadDigitosPares(n/10);
+		if((n%10)%2==0)
+			return s+1;                                     //condicion para ver si el ultimo digito es par, para ver si contarlo o no.
+		else
+			return s;
+	}
+}
+
+//suma de los digitos pares de un numero
+
+int sumaDigitosPares(int n)
+{
+	if(n<10)
+	{
+		if(n%2==0)
+			return n;
+		else                                       //condicion para ver si el numero es par o no.
+			return 0;
+	}
+	else
+	{
+		int s=sumaDigitosPares(n/10);
+		if((n%10)%2==0)
+			return s+n%10;                                     //condicion para ver si el ultimo digito es par, para ver si se lo suma o no.
+		else
+			return s;
+	}
+}
+
+//Encontrar el digito mayor de un numero
+//ej: 29573  -> 9
+
+int digitoMayor(int n)
+{
+	if(n<10)
+		return n;
+	else
+	{
+		int d=digitoMayor(n/10);
+		if(n%10>d)
+			return n%10;                                   //como asumo que todo ya lo calculo hasta n-1, pongo esta condicion, de ver si el ultimo es el mayor.
+		else
+			return d;
+	}
+}
+
+
+
+void main()
+{
+	int n,fact,sum,sump,pares,cuad,pot,p,sd,dp,sdp,dm;
+	float serie;
+	cout<<"Ingrese n: ";
+	cin>>n;
+	//cout<<"Ingrese la potencia: ";
+	//cin>>pot;
+	//fact=factorial(n);
+	//cout<<"El factorial de"<<n<<" ed "<<fact<<endl;
+	sum=suma(n);
+	cout<<"La suma de los "<<n<<" primeros numeros naturales es: "<<sum<<endl;
+	sump=sumaPares(n);
+	cout<<"La suma de los pares hasta "<<n<<" es: "<<sump<<endl;
+	pares=contarPares(n);
+	cout<<"La suma de los pares hasta "<<n<<" es: "<<pares<<endl;
+	//cuad=sumaCuadrado(n);
+	//cout<<"La suma de los cuadrados hasta "<<n<<" es: "<<cuad<<endl;
+	//serie=series(n);
+	//cout<<"La suma de la serie hasta "<<n<<" es: "<<serie<<endl;
+	//p=potencia(n,pot);
+	//cout<<"El resultado de "<<n<< " elevado a "<<pot<<" es: "<<p<<endl;
+	//naturales(n);
+	//cout<<endl;
+	//naturalesrevez(n);
+	//numParesEntre(n);
+	cout<<endl;
+	sd=sumaDigitos(n);
+	cout<<"El resultado de "<<n<< " sumado es "<<sd<<endl;
+	dp=cantidadDigitosPares(n);
+	cout<<"La cantidad de digitos pares de "<<n<< " es "<<dp<<endl;
+	sdp=sumaDigitosPares(n);
+	cout<<"La suma de los digitos pares de "<<n<< " es "<<sdp<<endl;
+	digitos(n);
+	dm=digitoMayor(n);
+	cout<<"El mayor digito de "<<n<< " es "<<dm<<endl;
+	digitos(n);
+	getch();
+}
