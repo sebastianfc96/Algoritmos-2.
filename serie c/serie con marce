@@ -1,0 +1,54 @@
+double power(double x, int k) {
+	double ret = 1.0;
+	for(int i = 1; i <= k; ++i) {
+		ret = ret * x;
+	}
+	return ret;
+}
+
+int factorial(int k) {
+	if(k <= 1) return 1;
+	return k * factorial(k - 1);
+}
+
+// t es el termino que va de 2 en 2
+// sig es el signo. verdadero para positivo, falso para negativo
+// lim es el numero limite de la serie
+// sum es donde guardamos la suma para irla pasando a las siguientes etapas recursivas
+// x es la x que nos pide la serie que hay que exponenciar
+double solveSeries(int t, bool sig, int lim, double sum, double x)
+{
+	if(t > lim) return sum;
+
+	double num = power(x, t);
+	double den = factorial(t);
+
+	// si sig es verdad sumamos
+	if(sig == true) {
+		sum = sum + (num / den);
+	} else { // sino, se resta
+		sum = sum - (num / den);
+	}
+
+	return solveSeries(t + 2, !sig, lim, sum, x);
+}
+
+int main() {
+
+	int n, x;
+
+	cin >> n >> x;
+
+	// el primer parametro debe ser 1 porque es el exponente inicial
+	// el segundo debe ser true porque siempre comenzamos sumando
+	// el tercero debe ser n porque ese es el numero limite para el exponente
+	// el cuarto debe ser 0.0 porque la suma siempre comienza en 0
+	// el quinto es x, necesario para la parte de exponenciar (numerador)
+	double ans = solveSeries(1, true, n, 0.0, x);
+
+	cout << ans << endl;
+
+	system("pause");
+
+	return 0;
+}
